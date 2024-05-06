@@ -4,6 +4,10 @@
 
 This is a basic calculator application designed for performing simple arithmetic calculations. It provides functionality for addition, subtraction, multiplication, and division.
 
+## Preview
+
+<img src="https://github.com/justADeni/Calculator/blob/master/img/calculator.jpg?raw=true" width="400" height="790">
+
 ## Features
 
 - Addition: Allows users to add two numbers together.
