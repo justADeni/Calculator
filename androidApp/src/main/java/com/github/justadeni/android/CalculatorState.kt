@@ -1,6 +1,8 @@
 package com.github.justadeni.android
 
 import org.mariuszgromada.math.mxparser.Expression
+import org.mariuszgromada.math.mxparser.PrimitiveElement
+import java.math.RoundingMode
 import kotlin.math.round
 
 
@@ -25,16 +27,18 @@ data class CalculatorState(var string: String = "") {
 
     fun evaluate(): CalculatorState {
         val e = Expression(string)
-        string = e.calculate().round(3).toString()
-        if (string.length >= 3 && string.contains('.') && string.takeLast(2) == ".0")
-            string = string.dropLast(2)
-        return this
-    }
+        val bd = e.calculate().toString().toBigDecimal()
+        bd.setScale(8, RoundingMode.HALF_EVEN)
+        string = bd.toPlainString()
 
-    private fun Double.round(decimals: Int): Double {
-        var multiplier = 1.0
-        repeat(decimals) { multiplier *= 10 }
-        return round(this * multiplier) / multiplier
+        // remove trailing zeroes
+        if (string.length >= 3 && string.contains('.'))
+            if (string.takeLast(1) == "0")
+                string = string.dropLast(1)
+            else if (string.takeLast(2) == ".0")
+                string = string.dropLast(2)
+
+        return this
     }
 
 }
