@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -37,15 +38,16 @@ fun Calculator (
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ) {
-            Text(
+            AutoResizedText(
                 text = state.string,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(32.dp),
-                fontWeight = FontWeight.Light,
-                fontSize = 80.sp,
-                color = Color.White,
-                maxLines = 2
+                style = TextStyle (
+                    fontSize = 80.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Light
+                )
             )
 
             Row(

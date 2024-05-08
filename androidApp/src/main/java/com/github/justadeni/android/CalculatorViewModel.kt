@@ -37,25 +37,21 @@ class CalculatorViewModel: ViewModel() {
                     state.pop()
             }
             is CalculatorAction.Number -> {
-                if (state.string.length < 6) {
-                    if (action.number != 0) {
-                        if (state.string.length == 1 && state.string[0] == '0')
-                            state.pop()
+                if (action.number != 0) {
+                    if (state.string.length == 1 && state.string[0] == '0')
+                        state.pop()
 
-                        state.add(action.number.digitToChar())
-                    } else if (!state.string.allZero()) {
-                        state.add('0')
-                    }
+                    state.add(action.number.digitToChar())
+                } else if (!state.string.allZero()) {
+                    state.add('0')
                 }
             }
             is CalculatorAction.Operation -> {
-                if (state.string.length < 6) {
-                    if (state.string.isNotBlank()) {
-                        if (state.string.last().isDot() || state.string.last().isOperator())
-                            state.pop()
+                if (state.string.isNotBlank()) {
+                    if (state.string.last().isDot() || state.string.last().isOperator())
+                        state.pop()
 
-                        state.add(action.operation.symbol)
-                    }
+                    state.add(action.operation.symbol)
                 }
             }
         }
